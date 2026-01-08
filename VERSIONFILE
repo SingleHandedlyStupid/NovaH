@@ -1,8 +1,8 @@
-2.5b;
-Reverted Diamond abilities as they were not worth working on.
-Removed Mail ability as it was not fast enough to be worthy.
-Fixed Bug Where Glovel Mastery could cause Crashes if spammed too fast.
-Fixed Ghost issue with fireclickdetector not working properly.
-Fixed AntiVoid Height Level
-Rewrote slapple autofarm
-removed Client antikick in favor of remote suppression
+2.6;
+Removed Glovel RAISE and DIG
+
+Removed Glovel Fast Travel port in favor of cannon teleport exploit
+
+Added Stun RemoteFire for firing Stun glove without equipping.
+
+Removed Slap aura in favor of slapple farming.
