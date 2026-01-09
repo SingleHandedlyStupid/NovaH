@@ -1,0 +1,323 @@
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+local vUrl="https://raw.githubusercontent.com/SingleHandedlyStupid/NovaH/refs/heads/main/VERSIONFILE"
+
+local barriers = {
+	"dedBarrier",
+	"AntiDefaultArena",
+	"DEATHBARRIER",
+	"DEATHBARRIER2",
+	"Antidream",
+	"ArenaBarrier"
+}
+
+for _, name in ipairs(barriers) do
+	local obj = workspace:FindFirstChild(name)
+	if obj then
+		obj:Destroy()
+	end
+end
+
+
+local VOIDP = workspace:FindFirstChild("VoitAnti")
+if VOIDP then VOIDP:Destroy() end
+
+local ppa=Instance.new("Part")
+ppa.Name="VoidAnti"
+ppa.Parent=workspace
+
+ppa.Size = Vector3.new(2048, 1, 2048)
+ppa.Position=Vector3.new(14.9, -9, 41.5)
+ppa.Transparency=0.6
+ppa.Anchored=true
+
+local dropdowntravel={
+    ["Castle Island"] = CFrame.new(Vector3.new(261.8, 33.6, 198.2)),
+    ["Main Island"] = CFrame.new(Vector3.new(-407.5, 50.2, -23.6)),
+    ["Slapple Island"] = CFrame.new(Vector3.new(-407.5, 50.2, -23.6)),
+
+
+}
+
+local no_expose=false
+
+local lastJump = 0
+local JUMP_COOLDOWN = 0.2
+
+local UrlContents = game:HttpGet(vUrl)
+local splits=string.split(UrlContents,";")
+local version=splits[1]
+local changelog=splits[2]
+
+function solve()
+    local AD=(#Game.Players:GetPlayers() * 25) + 1100 - 7
+    print("code is "..tostring(AD))
+    return tostring(AD)
+end
+
+print("version "..version or "nil")
+
+local VersionCurrent=2.6
+
+print("changelog? "..changelog or "nil")
+
+local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local RunService = game:GetService("RunService")
+local PathfindingService = game:GetService("PathfindingService")
+
+local localPlayer = Players.LocalPlayer
+
+local Window = Rayfield:CreateWindow({
+   Name = "GaN",
+   Icon = "atom", -- Icon in Topbar. Can use Lucide Icons (string) or Roblox Image (number). 0 to use no icon (default).
+   LoadingTitle = "Gallium Nitride",
+   LoadingSubtitle = "by SEMI-COLON",
+   ShowText = "Ga", -- for mobile users to unhide rayfield, change if you'd like
+   Theme = "Amethyst", -- Check https://docs.sirius.menu/rayfield/configuration/themes
+
+   ToggleUIKeybind = "K", -- The keybind to toggle the UI visibility (string like "K" or Enum.KeyCode)
+
+   DisableRayfieldPrompts = false,
+   DisableBuildWarnings = false, -- Prevents Rayfield from warning when the script has a version mismatch with the interface
+
+   ConfigurationSaving = {
+      Enabled = true,
+      FolderName = nil, -- Create a custom folder for your hub/game
+      FileName = "GaN"
+   },
+
+   Discord = {
+      Enabled = false, -- Prompt the user to join your Discord server if their executor supports it
+      Invite = "noinvitelink", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ ABCD would be ABCD
+      RememberJoins = true -- Set this to false to make them join the discord every time they load it up
+   },
+
+   KeySystem = false, -- Set this to true to use our key system
+   KeySettings = {
+      Title = "Untitled",
+      Subtitle = "Key System",
+      Note = "No method of obtaining the key is provided", -- Use this to tell the user how to get a key
+      FileName = "Key", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
+      SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
+      GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
+      Key = {"Hello"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
+   }
+})
+
+Rayfield:Notify({
+   Title = "GaN",
+   Content = "Loaded GaN!",
+   Duration = 6.5,
+   Image = "circle-check",
+})
+Rayfield:Notify({
+   Title = "GaN",
+   Content = "Logged in as "..Game.Players.LocalPlayer.Name,
+   Duration = 6.5,
+   Image = "user-check",
+})
+
+if VersionCurrent~=Version then
+   Rayfield:Notify({
+   Title = "Gallium Nitride",
+   Content = "Version mismatch ("..VersionCurrent.."), New version available "..Version,
+   Duration = 6.5,
+   Image = "history",
+})
+   Rayfield:Notify({
+   Title = "Gallium Nitride",
+   Content = "Auto loading "..Version,
+   Duration = 6.5,
+   Image = "history",
+})
+
+end
+
+
+--//Tabs for you SKIDS
+
+local Main = Window:CreateTab("Main", "droplet") -- Title, Image
+local Ghost = Window:CreateTab("Ghost", "ghost") -- Title, Image
+local Blatant = Window:CreateTab("Blatant", "shield-ban") -- Title, Image
+local Misc = Window:CreateTab("Miscellaneous", "vault") -- Title, Image
+local PlayerTab = Window:CreateTab("Player-Based", "user") -- Title, Image
+local BetaTab = Window:CreateTab("Beta", "history") -- Title, Image
+
+
+local WelcomeMessage = Main:CreateLabel("Welcome to GaN", "atom")
+local DIVIDER1 = Main:CreateDivider()
+local WN = Main:CreateLabel("Whats new?", "circle-plus")
+local New = Main:CreateParagraph({Title = "Version "..version, Content = changelog})
+
+
+Player = game.Players.LocalPlayer.Character.Name
+
+--//Blatant NOW.
+local GOTOSLAPPLE = Blatant:CreateButton({
+   Name = "Goto Slapple Island",
+   Callback = function()
+   local P=Vector3.new(-407.5, 50.2, -23.6)
+   game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(P)
+   end,
+})
+
+local GotoARENA = Blatant:CreateButton({
+   Name = "Goto Main Island",
+   Callback = function()
+   local P=Vector3.new(77.8, -5.1, -1.4)
+   game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(P)
+   end,
+})
+
+local GotoCASTLE = Blatant:CreateButton({
+   Name = "Goto Castle",
+   Callback = function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Vector3.new(261.8, 33.6, 198.2))
+   end,
+})
+
+
+--//goddamn finally, ghost stuff.
+local SolveKey = Ghost:CreateButton({
+   Name = "Solve Keypad",
+   Callback = function()
+   local P=game.workspace["Keypad"]
+   if P then
+    local code=solve()
+    for i=1,#code do
+        fireclickdetector(P["Buttons"][string.sub(code,i,i)].ClickDetector)
+        task.wait(.3)
+    end
+    fireclickdetector(P["Buttons"]["Enter"].ClickDetector)
+   end
+   end,
+})
+
+local SpyS = Misc:CreateButton({
+   Name = "Load RemoteSpy",
+   Callback = function()
+   loadstring(game:HttpGetAsync("https://github.com/richie0866/remote-spy/releases/latest/download/RemoteSpy.lua"))()
+   end,
+})
+
+local bob = Misc:CreateButton({
+   Name = "Replica auto-bob",
+   Callback = function()
+   game.ReplicatedStorage.bob:FireServer()
+   end,
+})
+
+local GlovelDig350 = Misc:CreateButton({
+   Name = "Glovel Dig Mastery | Cannot be turned off till end",
+   Callback = function()
+   Rayfield:Notify({
+   Title = "GaN",
+   Content = "Please, do not move while digging, this may take a while.",
+   Duration = 6.5,
+   Image = "circle-check",
+})
+   local remate = game:GetService("ReplicatedStorage").GlovelCancel
+   local remote = game:GetService("ReplicatedStorage").GlovelFunc
+		for i = 1, 350 do
+
+			-- yield happens here, not in your main thread
+			remote:InvokeServer()
+			remate:FireServer()
+
+			task.wait() -- 1 frame, prevents scheduler abuse
+		end
+   Rayfield:Notify({
+   Title = "Glovel",
+   Content = "350 Complete, Check Mastery Page.",
+   Duration = 6.5,
+   Image = "circle-check",
+})
+   end,
+})
+
+local CollectSlapples = Blatant:CreateButton({
+   Name = "Collect All Slapples",
+   Callback = function()
+   local kids=workspace.Arena.island5.Slapples:GetChildren()
+   Game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored=true
+   for _,k in pairs(kids) do
+    if k.Glove.Transparency==0 then
+        Game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = k.Glove.CFrame
+        Game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored=false
+            task.wait(.1)
+            Game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored=true
+    end
+   end
+local P=Vector3.new(-407.5, 50.2, -23.6)
+   game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(P)
+   task.wait(1)
+   Game.Players.LocalPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Running)
+   Game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored=false
+   end,
+})
+
+local GhostExploit = Ghost:CreateButton({
+   Name = "Ghost Invis Exploit",
+   Callback = function()
+   if game:GetService("Players").LocalPlayer.leaderstats.Glove.Value=="Ghost" then
+    local remote = game:GetService("ReplicatedStorage").Ghostinvisibilityactivated
+    remote:FireServer()
+   else
+       Rayfield:Notify({
+        Title = "GaN",
+        Content = "Equipping Ghost!",
+        Duration = 3.5,
+        Image = "circle-check",
+    })
+    fireclickdetector(workspace.Lobby.Ghost.ClickDetector)
+    local oldG=game:GetService("Players").LocalPlayer.leaderstats.Glove.Value
+        local remote = game:GetService("ReplicatedStorage").Ghostinvisibilityactivated
+    remote:FireServer()
+    fireclickdetector(workspace.Lobby[oldG].ClickDetector)
+   end
+   end,
+})
+
+local ToggleNoCatch = BetaTab:CreateToggle({
+    Name = "Leave on Expose",
+    CurrentValue = false,
+    Flag = "LoE",
+    Callback = function(Value)
+        no_expose = Value
+    end,
+})
+
+
+for _,k in pairs(game.Players:GetPlayers()) do
+    k.Chatted:Connect(function(msg)
+    if no_expose==true then
+            if string.find(msg:lower(),"cheater") or string.find(msg:lower(),"invi") or string.find(msg:lower(),"exploit") or string.find(msg:lower(),"hacker") or string.find(msg:lower(),"rec") then
+               Rayfield:Notify({
+        Title = "GaN",
+        Content = "Detection went off",
+        Duration = 3.5,
+        Image = "circle-check",
+    })
+    task.wait(.3)
+        Game.Players.LocalPlayer:Kick("DETECTED")
+    end
+    end
+end)
+end
+game.Players.PlayerAdded:Connect(function(player)
+player.Chatted:Connect(function(msg)
+    if no_expose==true then
+            if string.find(msg:lower(),"cheater") or string.find(msg:lower(),"invi") or string.find(msg:lower(),"exploit") or string.find(msg:lower(),"hacker") or string.find(msg:lower(),"rec") then
+               Rayfield:Notify({
+        Title = "GaN",
+        Content = "Detection went off",
+        Duration = 3.5,
+        Image = "circle-check",
+    })
+    Rayfield:Destroy()
+    task.wait(.3)
+        Game.Players.LocalPlayer:Kick("DETECTED")
+    end
+    end
+end)
+end)
