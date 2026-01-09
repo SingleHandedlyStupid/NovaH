@@ -152,21 +152,6 @@ if versionNum and VersionCurrent ~= versionNum then
     Rayfield:Destroy()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/SingleHandedlyStupid/NovaH/refs/heads/main/Gallium%20Nitride"))()
 end
-   Rayfield:Notify({
-   Title = "Gallium Nitride",
-   Content = "Version mismatch ("..VersionCurrent.."), New version available "..version,
-   Duration = 6.5,
-   Image = "history",
-})
-   Rayfield:Notify({
-   Title = "Gallium Nitride",
-   Content = "Auto loading "..version,
-   Duration = 6.5,
-   Image = "history",
-})
-Rayfield:Destroy()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/SingleHandedlyStupid/NovaH/refs/heads/main/Gallium%20Nitride"))()
-end
 
 
 --//Tabs for you SKIDS
