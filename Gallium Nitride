@@ -117,7 +117,7 @@ Rayfield:Notify({
    Image = "user-check",
 })
 
-if VersionCurrent~=version then
+if VersionCurrent~=tonumber("version") then
    Rayfield:Notify({
    Title = "Gallium Nitride",
    Content = "Version mismatch ("..VersionCurrent.."), New version available "..version,
