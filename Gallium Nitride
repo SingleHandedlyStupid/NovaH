@@ -1,5 +1,6 @@
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 local vUrl="https://raw.githubusercontent.com/SingleHandedlyStupid/NovaH/refs/heads/main/VERSIONFILE"
+local VersionCurrent = 2.7
 
 local barriers = {
 	"dedBarrier",
@@ -61,8 +62,6 @@ end
 -- convert to number safely
 versionStr = versionStr:gsub("%s+", "") -- remove whitespace
 local versionNum = tonumber(versionStr)
-
-local VersionCurrent = 2.7
 
 print("Current script version:", VersionCurrent)
 print("Latest version:", versionNum)
@@ -149,6 +148,7 @@ if versionNum and VersionCurrent ~= versionNum then
         Duration = 6.5,
         Image = "history",
     })
+    task.wait(3)
     Rayfield:Destroy()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/SingleHandedlyStupid/NovaH/refs/heads/main/Gallium%20Nitride"))()
 end
