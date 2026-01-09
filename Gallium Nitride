@@ -43,11 +43,30 @@ local no_expose=false
 local lastJump = 0
 local JUMP_COOLDOWN = 0.2
 
+-- fetch version file
 local UrlContents = game:HttpGet(vUrl)
-local splits=string.split(UrlContents,";")
-local versionStr = splits[1]:match("^%s*(.-)%s*$")
-local version = tonumber(versionStr)
-local changelog=splits[2]
+
+-- split at first semicolon
+local firstSemi = UrlContents:find(";")
+local versionStr, changelog
+
+if firstSemi then
+    versionStr = UrlContents:sub(1, firstSemi - 1)
+    changelog = UrlContents:sub(firstSemi + 1)
+else
+    versionStr = UrlContents
+    changelog = "No changelog available"
+end
+
+-- convert to number safely
+versionStr = versionStr:gsub("%s+", "") -- remove whitespace
+local versionNum = tonumber(versionStr)
+
+local VersionCurrent = 2.7
+
+print("Current script version:", VersionCurrent)
+print("Latest version:", versionNum)
+print("Changelog:", changelog)
 
 function solve()
     local AD=(#Game.Players:GetPlayers() * 25) + 1100 - 7
@@ -56,8 +75,6 @@ function solve()
 end
 
 print("version "..version or "nil")
-
-local VersionCurrent=2.6
 
 print("changelog? "..changelog or "nil")
 
@@ -118,7 +135,23 @@ Rayfield:Notify({
    Image = "user-check",
 })
 
-if VersionCurrent~=tonumber(version) then
+-- version check
+if versionNum and VersionCurrent ~= versionNum then
+    Rayfield:Notify({
+        Title = "Gallium Nitride",
+        Content = "Version mismatch ("..VersionCurrent.."), New version available "..versionNum,
+        Duration = 6.5,
+        Image = "history",
+    })
+    Rayfield:Notify({
+        Title = "Gallium Nitride",
+        Content = "Auto loading "..versionNum,
+        Duration = 6.5,
+        Image = "history",
+    })
+    Rayfield:Destroy()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/SingleHandedlyStupid/NovaH/refs/heads/main/Gallium%20Nitride"))()
+end
    Rayfield:Notify({
    Title = "Gallium Nitride",
    Content = "Version mismatch ("..VersionCurrent.."), New version available "..version,
