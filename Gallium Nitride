@@ -130,6 +130,7 @@ if VersionCurrent~=Version then
    Duration = 6.5,
    Image = "history",
 })
+Rayfield:Destroy()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/SingleHandedlyStupid/NovaH/refs/heads/main/Gallium%20Nitride"))()
 end
 
