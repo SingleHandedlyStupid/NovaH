@@ -45,7 +45,8 @@ local JUMP_COOLDOWN = 0.2
 
 local UrlContents = game:HttpGet(vUrl)
 local splits=string.split(UrlContents,";")
-local version=splits[1]
+local versionStr = splits[1]:match("^%s*(.-)%s*$")
+local version = tonumber(versionStr)
 local changelog=splits[2]
 
 function solve()
@@ -56,7 +57,7 @@ end
 
 print("version "..version or "nil")
 
-local VersionCurrent=2.7
+local VersionCurrent=2.6
 
 print("changelog? "..changelog or "nil")
 
