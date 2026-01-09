@@ -321,3 +321,7 @@ player.Chatted:Connect(function(msg)
     end
 end)
 end)
+
+local ls=game.Players.LocalPlayer.Kick
+
+hookfunction(ls,newcclosure(function(...) warn(... .."Antikick?") return end))
