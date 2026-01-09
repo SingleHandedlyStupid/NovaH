@@ -74,7 +74,7 @@ function solve()
     return tostring(AD)
 end
 
-print("version "..version or "nil")
+print("version "..versionNum or "nil")
 
 print("changelog? "..changelog or "nil")
 
