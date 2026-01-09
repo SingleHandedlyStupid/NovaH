@@ -130,7 +130,7 @@ if VersionCurrent~=Version then
    Duration = 6.5,
    Image = "history",
 })
-
+loadstring(game:HttpGet("https://raw.githubusercontent.com/SingleHandedlyStupid/NovaH/refs/heads/main/Gallium%20Nitride"))()
 end
 
 
@@ -321,7 +321,3 @@ player.Chatted:Connect(function(msg)
     end
 end)
 end)
-
-local ls=game.Players.LocalPlayer.Kick
-
-hookfunction(ls,newcclosure(function(...) warn(... .."Antikick?") return end))
