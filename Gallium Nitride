@@ -56,7 +56,7 @@ end
 
 print("version "..version or "nil")
 
-local VersionCurrent=2.6
+local VersionCurrent=2.7
 
 print("changelog? "..changelog or "nil")
 
