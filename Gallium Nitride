@@ -62,7 +62,7 @@ end
 versionStr = versionStr:gsub("%s+", "") -- remove whitespace
 local versionNum = tonumber(versionStr)
 
-local VersionCurrent = 2.6
+local VersionCurrent = 2.7
 
 print("Current script version:", VersionCurrent)
 print("Latest version:", versionNum)
