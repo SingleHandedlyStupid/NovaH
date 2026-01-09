@@ -1,8 +1,4 @@
-2.6;
-Removed Glovel RAISE and DIG
+2.7;
+Attempted to create a hookfunction newcclosure antikick
 
-Removed Glovel Fast Travel port in favor of cannon teleport exploit
-
-Removed Stun RemoteFire when it got patched right fucking after
-
-Removed Slap aura in favor of slapple farming.
+removed stun, added version check as well as automatic updating.
