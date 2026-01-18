@@ -1,4 +1,4 @@
-2.7;
-Attempted to create a hookfunction newcclosure antikick
-
-removed stun, added version check as well as automatic updating.
+3.9;
+Overhaul of Remotes, Removed MR due to it being useless, re-added rockify for funnies,
+Added "Tycoon Destroyer" to destroy tycoons you select.
+Added "_G.qb" 1 - 2 for easy quickbind alterations during runtime.
